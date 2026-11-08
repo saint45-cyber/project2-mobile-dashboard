@@ -1,76 +1,77 @@
 
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101522">
-<title>Project 2 — Control Dashboard</title>
+<title>Project 2 — Founder Control Panel</title>
 <style>
-:root{--panel:#141c2d;--text:#eef3ff;--muted:#9aa8c2;--line:#2b3850}
+:root{--panel:#141c2d;--text:#eef3ff;--muted:#9aa8c2;--line:#2b3850;--blue:#7897ff}
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(160deg,#10182a,#080c17 65%);color:var(--text);font:15px system-ui,sans-serif;padding:18px}
-main{max-width:760px;margin:auto}
-.eyebrow{font-size:11px;letter-spacing:2px;color:#9cb4ff;font-weight:800}
-.header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin:8px 0 18px}
-h1{font-size:25px;line-height:1.15;margin:4px 0}
-.pill{border:1px solid #6a5733;background:#2c2417;color:#ffd38a;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}
-.notice{background:#302719;border:1px solid #6c5130;border-radius:12px;padding:12px;color:#f8d9a5;font-size:13px;line-height:1.45;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px}
-.label{font-size:12px;color:var(--muted);margin-bottom:8px}
-.metric{font-size:20px;font-weight:800}
-.sub{font-size:12px;color:var(--muted);margin-top:5px}
-.section{font-weight:800;margin:22px 0 10px;font-size:16px}
-.statusrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
-.statusrow:last-child{border:0}
-.name{font-weight:700}
-.desc{font-size:12px;color:var(--muted);margin-top:3px}
-.state{font-size:11px;font-weight:800;border-radius:999px;padding:6px 9px;background:#183328;color:#9bf0c6;white-space:nowrap}
-.state.warn{background:#382b18;color:#ffd58a}
-.state.off{background:#292f3d;color:#b6c0d4}
+body{margin:0;background:linear-gradient(160deg,#10182a,#080c17 65%);color:var(--text);font:15px system-ui,sans-serif;padding:16px}
+main{max-width:760px;margin:auto}.eyebrow{font-size:11px;letter-spacing:2px;color:#9cb4ff;font-weight:800}
+header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin:8px 0 16px}
+h1{font-size:24px;margin:4px 0}.muted{color:var(--muted);font-size:12px}
+.pill{border:1px solid #6a5733;background:#2c2417;color:#ffd38a;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800}
+.notice{background:#302719;border:1px solid #6c5130;border-radius:12px;padding:12px;color:#f8d9a5;font-size:13px;line-height:1.45;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.label{font-size:12px;color:var(--muted);margin-bottom:7px}.metric{font-size:20px;font-weight:800}
+.section{font-weight:800;margin:20px 0 10px;font-size:16px}
+.progressline{display:flex;justify-content:space-between;gap:8px;margin:12px 0 6px;font-size:13px}
+.track{height:7px;background:#27344b;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--blue);border-radius:99px}
+.statusrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.statusrow:last-child{border:0}.name{font-weight:700}.desc{font-size:12px;color:var(--muted);margin-top:3px}
+.state{font-size:10px;font-weight:800;border-radius:999px;padding:6px 8px;background:#292f3d;color:#b6c0d4;white-space:nowrap}
+.state.ready{background:#183328;color:#9bf0c6}.state.review{background:#382b18;color:#ffd58a}
 .controls{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
 .btn{border:1px solid #425270;background:#24324a;color:white;border-radius:10px;padding:10px 13px;font-weight:700}
 .btn.primary{background:#3157c9;border-color:#5277ec}
 footer{font-size:11px;color:var(--muted);text-align:center;margin:22px 0 8px}
-@media(max-width:420px){body{padding:13px}.header h1{font-size:22px}.metric{font-size:18px}}
+@media(max-width:420px){body{padding:12px}h1{font-size:21px}.metric{font-size:18px}}
 </style>
 </head>
-<body>
-<main>
+<body><main>
 <div class="eyebrow">PROJECT 2 · AI TRADING ORGANIZATION</div>
-<div class="header">
-<div><h1>Control Dashboard</h1><div class="sub">Mobile prototype · System visibility</div></div>
-<span class="pill">DEMO ONLY</span>
-</div>
-<div class="notice"><strong>Prototype notice:</strong> Statuses below are illustrative UI values only. No server, AI agents, MT5 account, or live trading connection is active. Do not use this page to make trading decisions.</div>
+<header><div><h1>Founder Control Panel</h1><div class="muted">Project overview · Development progress</div></div><span class="pill">DEMO ONLY</span></header>
+<div class="notice"><strong>Prototype notice:</strong> Progress and status are illustrative project-tracking values, not live backend or agent telemetry. MT5 and real-money trading are not connected or authorized.</div>
 <div class="grid">
-<div class="card"><div class="label">Backend connection</div><div class="metric">Not connected</div><div class="sub">Server integration pending</div></div>
-<div class="card"><div class="label">Trading environment</div><div class="metric">Demo / simulated</div><div class="sub">Live mode unavailable</div></div>
-<div class="card"><div class="label">Agent activity</div><div class="metric">UI preview</div><div class="sub">No agents running</div></div>
-<div class="card"><div class="label">MT5 gateway</div><div class="metric">Disconnected</div><div class="sub">Broker access not configured</div></div>
+<div class="card"><div class="label">Project phase</div><div class="metric">Design & prototype</div><div class="muted">Pre-computer preparation</div></div>
+<div class="card"><div class="label">Live trading</div><div class="metric">Not authorized</div><div class="muted">Requires separate Founder approval</div></div>
 </div>
-<div class="section">System status</div>
+<div class="section">Project progress · planning view</div>
 <div class="card">
-<div class="statusrow"><div><div class="name">Central AI</div><div class="desc">Coordinator · not deployed</div></div><span class="state off">OFFLINE</span></div>
-<div class="statusrow"><div><div class="name">Market Intelligence</div><div class="desc">Fundamental + technical analysis</div></div><span class="state off">INACTIVE</span></div>
-<div class="statusrow"><div><div class="name">Risk Management</div><div class="desc">Independent controls · not deployed</div></div><span class="state warn">NOT READY</span></div>
-<div class="statusrow"><div><div class="name">Trade Execution</div><div class="desc">MT5 integration · disabled</div></div><span class="state off">DISABLED</span></div>
-<div class="statusrow"><div><div class="name">Mobile Operations</div><div class="desc">Dashboard interface</div></div><span class="state">PREVIEW</span></div>
+<div class="progressline"><span>Core organization design</span><strong>Approved planning</strong></div><div class="track"><div class="fill" style="width:82%"></div></div>
+<div class="progressline"><span>Mobile dashboard prototype</span><strong>Published</strong></div><div class="track"><div class="fill" style="width:100%"></div></div>
+<div class="progressline"><span>Python pre-computer learning</span><strong>In progress</strong></div><div class="track"><div class="fill" style="width:20%"></div></div>
+<div class="progressline"><span>Backend implementation</span><strong>Not started</strong></div><div class="track"><div class="fill" style="width:0%"></div></div>
+<div class="progressline"><span>Backtesting & demo validation</span><strong>Not started</strong></div><div class="track"><div class="fill" style="width:0%"></div></div>
 </div>
-<div class="section">Safe controls · preview only</div>
+<div class="section">Department overview</div>
 <div class="card">
-<div class="desc">These buttons only change the page's local demonstration label. They do not start or stop a server or trading process.</div>
+<div class="statusrow"><div><div class="name">Executive Intelligence</div><div class="desc">Founder-led governance</div></div><span class="state ready">CHARTERED</span></div>
+<div class="statusrow"><div><div class="name">Market Intelligence</div><div class="desc">Fundamental + technical consensus</div></div><span class="state ready">DESIGNED</span></div>
+<div class="statusrow"><div><div class="name">Risk Management</div><div class="desc">Independent risk veto and limits</div></div><span class="state ready">DESIGNED</span></div>
+<div class="statusrow"><div><div class="name">Trade Execution</div><div class="desc">MT5 execution framework</div></div><span class="state ready">DESIGNED</span></div>
+<div class="statusrow"><div><div class="name">Central Operations</div><div class="desc">Monitoring, continuity, coordination</div></div><span class="state ready">DESIGNED</span></div>
+<div class="statusrow"><div><div class="name">Mobile Operations</div><div class="desc">Android visibility and safe controls</div></div><span class="state ready">PROTOTYPED</span></div>
+<div class="statusrow"><div><div class="name">Central AI & infrastructure</div><div class="desc">Architecture + deployment preparation</div></div><span class="state review">PLANNED</span></div>
+</div>
+<div class="section">Pending milestones</div>
+<div class="card">
+<div class="statusrow"><div><div class="name">1 · Continue Python exercises</div><div class="desc">Build beginner programming foundations</div></div><span class="state review">NEXT</span></div>
+<div class="statusrow"><div><div class="name">2 · Build backend skeleton</div><div class="desc">After computer access; API and database basics</div></div><span class="state">PENDING</span></div>
+<div class="statusrow"><div><div class="name">3 · Create simulated agent workflow</div><div class="desc">No broker connection; test signals and risk gates</div></div><span class="state">PENDING</span></div>
+<div class="statusrow"><div><div class="name">4 · Backtest and demo validation</div><div class="desc">Document results and safety checks</div></div><span class="state">PENDING</span></div>
+</div>
+<div class="section">Founder preview controls</div>
+<div class="card"><div class="desc">These controls change only this page's local preview label. They do not control servers, AI agents, or trades.</div>
 <div class="controls"><button class="btn primary" id="pauseBtn" onclick="toggleDemo()">Pause preview</button><button class="btn" onclick="resetDemo()">Reset preview</button></div>
-<div class="sub" id="demoState" aria-live="polite">Preview state: running locally in this page</div>
-</div>
-<footer>TEST FIRST · PROTECT CAPITAL · AUTOMATE RESPONSIBLY<br>Project 2 · Mobile prototype</footer>
+<div class="muted" id="demoState" aria-live="polite">Preview state: running locally in this page</div></div>
+<footer>TEST FIRST · PROTECT CAPITAL · AUTOMATE RESPONSIBLY<br>Project 2 · Founder view · Prototype</footer>
 </main>
 <script>
 let paused=false;
 function toggleDemo(){paused=!paused;document.getElementById('pauseBtn').textContent=paused?'Resume preview':'Pause preview';document.getElementById('demoState').textContent=paused?'Preview state: paused locally':'Preview state: running locally in this page'}
 function resetDemo(){paused=false;document.getElementById('pauseBtn').textContent='Pause preview';document.getElementById('demoState').textContent='Preview state: running locally in this page'}
-</script>
-</body>
-</html>
+</script></body></html>
