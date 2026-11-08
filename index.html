@@ -1,88 +1,76 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1220">
-<title>index.html</title>
+<meta name="theme-color" content="#101522">
+<title>Project 2 — Control Dashboard</title>
 <style>
-:root{--bg:#0b1220;--panel:#121c2e;--panel2:#17243a;--line:#26354d;--text:#edf3ff;--muted:#91a3bf;--accent:#60a5fa;--green:#34d399;--yellow:#fbbf24;--red:#fb7185}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#0b1220,#101a2b 55%,#0b1220);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{padding:20px 18px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1220ee;backdrop-filter:blur(12px);z-index:3}
-.brand{display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{color:var(--accent);font-size:11px;letter-spacing:1.7px;font-weight:800}.brand h1{font-size:21px;margin:4px 0 0}.pill{font-size:11px;font-weight:800;border:1px solid #7c5d20;background:#3b2d13;color:#fcd878;padding:6px 9px;border-radius:20px;white-space:nowrap}
-main{max-width:760px;margin:auto;padding:16px 14px 100px}.intro{color:var(--muted);font-size:13px;line-height:1.5;margin:4px 2px 16px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:linear-gradient(145deg,var(--panel),#101a2a);border:1px solid var(--line);border-radius:16px;padding:15px;min-width:0}.wide{grid-column:1/-1}.label{font-size:12px;color:var(--muted)}.metric{font-size:25px;font-weight:750;margin-top:7px;letter-spacing:-.5px}.sub{font-size:11px;color:var(--muted);margin-top:5px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:23px 3px 11px;font-weight:750;font-size:15px}.section-title small{color:var(--muted);font-weight:500;font-size:11px}
-.status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--green)}.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-.departments{display:grid;grid-template-columns:1fr 1fr;gap:9px}.dept{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px;text-align:left;color:var(--text);cursor:pointer}.dept strong{display:block;font-size:13px;margin-bottom:7px}.dept small{font-size:11px;color:var(--muted)}
-.alert{border:1px solid #59471e;background:#2a2417;border-radius:12px;padding:12px;margin-bottom:9px;display:flex;gap:10px;align-items:flex-start}.alert .warn{color:var(--yellow);font-weight:900}.alert p{margin:0;font-size:12px;line-height:1.45}.alert button{margin-left:auto;background:transparent;border:1px solid #66552c;color:#f7d778;border-radius:8px;padding:6px 8px;font-size:11px}
-.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 14px;border-radius:11px;font-weight:700;font-size:12px;cursor:pointer}.btn.primary{background:#1d4e89;border-color:#367bc2}.btn.danger{background:#3b1c29;border-color:#773047;color:#ffc3ce}
-footer{position:fixed;bottom:0;left:0;right:0;background:#0b1220f2;border-top:1px solid var(--line);padding:10px max(10px,calc((100% - 760px)/2));display:flex;justify-content:space-around;gap:5px;z-index:4}.nav{color:var(--muted);background:none;border:0;font-size:11px;padding:8px 7px;cursor:pointer}.nav.active{color:var(--accent);font-weight:800}
-.view{display:none}.view.active{display:block}.bar{height:7px;border-radius:10px;background:#26354d;overflow:hidden;margin-top:9px}.bar span{display:block;height:100%;width:22%;background:var(--green);border-radius:10px}
-.rows{display:grid;gap:10px}.rowitem{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:9px 0;font-size:12px}.rowitem:last-child{border:0}.rowitem span:last-child{color:var(--muted);text-align:right}
-.note{font-size:11px;color:var(--muted);line-height:1.5;margin:14px 3px}.empty{color:var(--muted);font-size:12px;padding:8px 0}
-@media(min-width:600px){.departments{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(4,1fr)}.wide{grid-column:span 2}}
+:root{--panel:#141c2d;--text:#eef3ff;--muted:#9aa8c2;--line:#2b3850}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(160deg,#10182a,#080c17 65%);color:var(--text);font:15px system-ui,sans-serif;padding:18px}
+main{max-width:760px;margin:auto}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#9cb4ff;font-weight:800}
+.header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin:8px 0 18px}
+h1{font-size:25px;line-height:1.15;margin:4px 0}
+.pill{border:1px solid #6a5733;background:#2c2417;color:#ffd38a;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}
+.notice{background:#302719;border:1px solid #6c5130;border-radius:12px;padding:12px;color:#f8d9a5;font-size:13px;line-height:1.45;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px}
+.label{font-size:12px;color:var(--muted);margin-bottom:8px}
+.metric{font-size:20px;font-weight:800}
+.sub{font-size:12px;color:var(--muted);margin-top:5px}
+.section{font-weight:800;margin:22px 0 10px;font-size:16px}
+.statusrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.statusrow:last-child{border:0}
+.name{font-weight:700}
+.desc{font-size:12px;color:var(--muted);margin-top:3px}
+.state{font-size:11px;font-weight:800;border-radius:999px;padding:6px 9px;background:#183328;color:#9bf0c6;white-space:nowrap}
+.state.warn{background:#382b18;color:#ffd58a}
+.state.off{background:#292f3d;color:#b6c0d4}
+.controls{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.btn{border:1px solid #425270;background:#24324a;color:white;border-radius:10px;padding:10px 13px;font-weight:700}
+.btn.primary{background:#3157c9;border-color:#5277ec}
+footer{font-size:11px;color:var(--muted);text-align:center;margin:22px 0 8px}
+@media(max-width:420px){body{padding:13px}.header h1{font-size:22px}.metric{font-size:18px}}
 </style>
 </head>
 <body>
-<header><div class="brand"><div><div class="eyebrow">PROJECT 2 · AI TRADING ORGANIZATION</div><h1>Control Dashboard</h1></div><span class="pill">DEMO MODE</span></div></header>
 <main>
-<p class="intro">A first mobile prototype for organization visibility and safe control. Every value and action below is simulated.</p>
-<section id="home" class="view active">
+<div class="eyebrow">PROJECT 2 · AI TRADING ORGANIZATION</div>
+<div class="header">
+<div><h1>Control Dashboard</h1><div class="sub">Mobile prototype · System visibility</div></div>
+<span class="pill">DEMO ONLY</span>
+</div>
+<div class="notice"><strong>Prototype notice:</strong> Statuses below are illustrative UI values only. No server, AI agents, MT5 account, or live trading connection is active. Do not use this page to make trading decisions.</div>
 <div class="grid">
-<div class="card"><div class="label">Demo account equity</div><div class="metric">$10,000.00</div><div class="sub">Sample value · not broker data</div></div>
-<div class="card"><div class="label">Open risk</div><div class="metric">0.00%</div><div class="sub">Illustrative only</div></div>
-<div class="card"><div class="label">Market status</div><div class="metric" style="font-size:19px">Monitoring</div><div class="sub">No live market feed</div></div>
-<div class="card"><div class="label">System status</div><div class="metric" style="font-size:19px;color:var(--green)">Prototype</div><div class="sub">No broker connected</div></div>
+<div class="card"><div class="label">Backend connection</div><div class="metric">Not connected</div><div class="sub">Server integration pending</div></div>
+<div class="card"><div class="label">Trading environment</div><div class="metric">Demo / simulated</div><div class="sub">Live mode unavailable</div></div>
+<div class="card"><div class="label">Agent activity</div><div class="metric">UI preview</div><div class="sub">No agents running</div></div>
+<div class="card"><div class="label">MT5 gateway</div><div class="metric">Disconnected</div><div class="sub">Broker access not configured</div></div>
 </div>
-<div class="section-title">Organization departments <small>Tap to view</small></div>
-<div class="departments">
-<button class="dept" data-view="executive"><strong>Executive Intelligence</strong><small>Coordination & oversight</small></button>
-<button class="dept" data-view="market"><strong>Market Intelligence</strong><small>Fundamental + technical</small></button>
-<button class="dept" data-view="risk"><strong>Risk Management</strong><small>Independent risk controls</small></button>
-<button class="dept" data-view="execution"><strong>Trade Execution</strong><small>MT5 gateway · not connected</small></button>
-<button class="dept" data-view="central"><strong>Central Operations</strong><small>Monitoring & continuity</small></button>
-<button class="dept" data-view="mobile"><strong>Mobile Operations</strong><small>Dashboard & remote controls</small></button>
+<div class="section">System status</div>
+<div class="card">
+<div class="statusrow"><div><div class="name">Central AI</div><div class="desc">Coordinator · not deployed</div></div><span class="state off">OFFLINE</span></div>
+<div class="statusrow"><div><div class="name">Market Intelligence</div><div class="desc">Fundamental + technical analysis</div></div><span class="state off">INACTIVE</span></div>
+<div class="statusrow"><div><div class="name">Risk Management</div><div class="desc">Independent controls · not deployed</div></div><span class="state warn">NOT READY</span></div>
+<div class="statusrow"><div><div class="name">Trade Execution</div><div class="desc">MT5 integration · disabled</div></div><span class="state off">DISABLED</span></div>
+<div class="statusrow"><div><div class="name">Mobile Operations</div><div class="desc">Dashboard interface</div></div><span class="state">PREVIEW</span></div>
 </div>
-<div class="section-title">Alerts <small id="alertCount">1 active</small></div>
-<div id="alerts">
-<div class="alert" id="demoAlert"><span class="warn">!</span><p><strong>Prototype notice</strong><br>This dashboard uses simulated data. No live trades or broker actions are possible.</p><button onclick="ackAlert()">Acknowledge</button></div>
+<div class="section">Safe controls · preview only</div>
+<div class="card">
+<div class="desc">These buttons only change the page's local demonstration label. They do not start or stop a server or trading process.</div>
+<div class="controls"><button class="btn primary" id="pauseBtn" onclick="toggleDemo()">Pause preview</button><button class="btn" onclick="resetDemo()">Reset preview</button></div>
+<div class="sub" id="demoState" aria-live="polite">Preview state: running locally in this page</div>
 </div>
-<div class="section-title">Safe controls <small>Simulated only</small></div>
-<div class="card"><div class="actions"><button class="btn primary" onclick="togglePause()" id="pauseBtn">Pause prototype</button><button class="btn" onclick="addAlert()">Create test alert</button></div><p class="note" id="pauseState">Prototype status: running. This control does not affect a trading system.</p></div>
-</section>
-<section id="executive" class="view">
-<div class="section-title">Executive Intelligence</div><div class="card"><div class="status"><i class="dot"></i> Oversight view</div><p class="note">Founder authority remains ultimate. This screen is a visual mockup and cannot grant permissions or approve production changes.</p><div class="rows"><div class="rowitem"><span>Departments represented</span><span>6</span></div><div class="rowitem"><span>Live broker connection</span><span>Not connected</span></div><div class="rowitem"><span>Production approval</span><span>Not granted</span></div></div></div>
-</section>
-<section id="market" class="view">
-<div class="section-title">Market Intelligence</div><div class="card"><div class="label">Sample analysis state</div><div class="metric" style="font-size:20px">Waiting for data</div><p class="note">Fundamental and Technical sectors must agree on instrument and direction before a signal can be considered. No market feed is connected in this prototype.</p><div class="rows"><div class="rowitem"><span>Fundamental sector</span><span>Not connected</span></div><div class="rowitem"><span>Technical sector</span><span>Not connected</span></div><div class="rowitem"><span>Signal</span><span>None</span></div></div></div>
-</section>
-<section id="risk" class="view">
-<div class="section-title">Risk Management</div><div class="card"><div class="status" style="color:var(--yellow)"><i class="dot"></i> Rules displayed · not enforced</div><div class="rows" style="margin-top:12px"><div class="rowitem"><span>Risk per trade cap</span><span>0.5%</span></div><div class="rowitem"><span>Aggregate open risk cap</span><span>2.0%</span></div><div class="rowitem"><span>Daily drawdown limit</span><span>2.0%</span></div><div class="rowitem"><span>Weekly drawdown limit</span><span>5.0%</span></div><div class="rowitem"><span>Total drawdown shutdown</span><span>10.0%</span></div><div class="rowitem"><span>Minimum net R:R</span><span>1:3</span></div></div><p class="note">These are the project's planned controls, not an active risk engine. No trade is being evaluated.</p></div>
-</section>
-<section id="execution" class="view">
-<div class="section-title">Trade Execution</div><div class="card"><div class="label">Execution gateway</div><div class="metric" style="font-size:20px">Disconnected</div><p class="note">MT5 connection and order actions are intentionally unavailable. This page cannot place, change, or close orders.</p><div class="rows"><div class="rowitem"><span>Orders</span><span>0 · simulated</span></div><div class="rowitem"><span>Protective stop verification</span><span>Not active</span></div></div></div>
-</section>
-<section id="central" class="view">
-<div class="section-title">Central Operations</div><div class="card"><div class="status"><i class="dot"></i> Prototype health</div><div class="bar"><span></span></div><div class="rows" style="margin-top:13px"><div class="rowitem"><span>Services</span><span>Mock only</span></div><div class="rowitem"><span>Audit log</span><span>Local demo interactions</span></div><div class="rowitem"><span>Recovery</span><span>Not implemented</span></div></div></div>
-</section>
-<section id="mobile" class="view">
-<div class="section-title">Mobile Operations</div><div class="card"><div class="label">Phone control surface</div><div class="metric" style="font-size:20px">Prototype ready</div><p class="note">Planned controls will be restricted to authorized actions, with safeguards. No commands are queued or sent from this version.</p><div class="actions"><button class="btn" onclick="addAlert()">Test notification</button><button class="btn" onclick="ackAll()">Acknowledge alerts</button></div></div>
-</section>
-<section id="reports" class="view">
-<div class="section-title">Reports & Analytics</div><div class="grid"><div class="card"><div class="label">Win rate</div><div class="metric">—</div><div class="sub">No trades in demo</div></div><div class="card"><div class="label">Drawdown</div><div class="metric">—</div><div class="sub">No broker data</div></div><div class="card wide"><div class="label">Performance summary</div><p class="note">Reports will populate only after verified data sources are integrated and tested.</p></div></div>
-</section>
+<footer>TEST FIRST · PROTECT CAPITAL · AUTOMATE RESPONSIBLY<br>Project 2 · Mobile prototype</footer>
 </main>
-<footer>
-<button class="nav active" data-view="home">Home</button><button class="nav" data-view="market">Markets</button><button class="nav" data-view="risk">Risk</button><button class="nav" data-view="reports">Reports</button><button class="nav" data-view="mobile">Control</button>
-</footer>
 <script>
-let paused=false,alerts=1;
-function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.view===id));window.scrollTo({top:0,behavior:'smooth'});}
-document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',()=>showView(el.dataset.view)));
-function togglePause(){paused=!paused;document.getElementById('pauseBtn').textContent=paused?'Resume prototype':'Pause prototype';document.getElementById('pauseState').textContent='Prototype status: '+(paused?'paused':'running')+'. This control does not affect a trading system.';}
-function ackAlert(){const a=document.getElementById('demoAlert');if(a){a.remove();alerts=Math.max(0,alerts-1);document.getElementById('alertCount').textContent=alerts+' active';}}
-function addAlert(){alerts++;const wrap=document.getElementById('alerts');const a=document.createElement('div');a.className='alert';a.innerHTML='<span class="warn">!</span><p><strong>Test notification</strong><br>Generated locally by the dashboard prototype.</p><button>Acknowledge</button>';a.querySelector('button').onclick=()=>{a.remove();alerts=Math.max(0,alerts-1);document.getElementById('alertCount').textContent=alerts+' active';};wrap.appendChild(a);document.getElementById('alertCount').textContent=alerts+' active';}
-function ackAll(){document.getElementById('alerts').innerHTML='<div class="empty">No active alerts. (Demo state)</div>';alerts=0;document.getElementById('alertCount').textContent='0 active';}
+let paused=false;
+function toggleDemo(){paused=!paused;document.getElementById('pauseBtn').textContent=paused?'Resume preview':'Pause preview';document.getElementById('demoState').textContent=paused?'Preview state: paused locally':'Preview state: running locally in this page'}
+function resetDemo(){paused=false;document.getElementById('pauseBtn').textContent='Pause preview';document.getElementById('demoState').textContent='Preview state: running locally in this page'}
 </script>
 </body>
 </html>
