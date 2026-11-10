@@ -180,6 +180,77 @@ function resetPreview(){
  document.getElementById("pauseBtn").textContent="Pause preview";
  document.getElementById("demoState").textContent="Preview state: running locally in this page";
 }
+ 
+// FOUNDER ACTIVITY & DECISION LOG
+const logSection = document.createElement("section");
+logSection.innerHTML = `
+<div class="section">Founder Activity & Decision Log</div>
+<div class="card">
+<label class="label" for="logType">Entry type</label>
+<select id="logType">
+<option>Founder decision</option>
+<option>Completed task</option>
+<option>Pending approval</option>
+<option>Project risk or issue</option>
+</select>
+<br><br>
+<label class="label" for="logText">Description</label>
+<textarea id="logText" placeholder="Record an important project update..." style="width:100%;min-height:85px;background:#202d43;color:white;border:1px solid #465775;border-radius:8px;padding:10px"></textarea>
+<div class="controls">
+<button class="primary" id="saveLog">Save entry</button>
+</div>
+<div class="section">Activity history</div>
+<div id="logList"></div>
+</div>
+`;
+document.querySelector("main footer").before(logSection);
+
+function showLogs(){
+ const list=document.getElementById("logList");
+ list.innerHTML="";
+ let logs=[];
+ try{logs=JSON.parse(localStorage.getItem("project2ActivityLog"))||[];}catch(e){}
+ logs.forEach(entry=>{
+  const item=document.createElement("div");
+  item.className="milestone";
+  const title=document.createElement("strong");
+  title.textContent=entry.type;
+  const date=document.createElement("div");
+  date.className="muted";
+  date.textContent=entry.date;
+  const description=document.createElement("div");
+  description.textContent=entry.text;
+  description.style.marginTop="6px";
+  item.append(title,date,description);
+  list.append(item);
+ });
+ if(!logs.length) list.textContent="No activity recorded yet.";
+}
+
+document.getElementById("saveLog").addEventListener("click",()=>{
+ const type=document.getElementById("logType").value;
+ const field=document.getElementById("logText");
+ const value=field.value.trim();
+ if(!value){alert("Please enter a description.");return;}
+ let logs=[];
+ try{logs=JSON.parse(localStorage.getItem("project2ActivityLog"))||[];}catch(e){}
+ logs.unshift({
+  type:type,
+  text:value,
+  date:new Date().toLocaleString()
+ });
+ try{
+  localStorage.setItem("project2ActivityLog",JSON.stringify(logs));
+ }catch(e){
+  alert("Could not save this entry on your device.");
+  return;
+ }
+ field.value="";
+ showLogs();
+ alert("Activity entry saved!");
+});
+showLogs();
+
 render();
 </script>
 </body>
