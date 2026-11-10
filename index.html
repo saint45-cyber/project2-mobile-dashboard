@@ -251,6 +251,101 @@ document.getElementById("saveLog").addEventListener("click",()=>{
 });
 showLogs();
 
+// FOUNDER COMMAND CENTER
+const commandCenter = document.createElement("section");
+
+commandCenter.innerHTML = `
+<div class="section">Founder Command Center</div>
+<div class="grid">
+  <div class="card">
+    <div class="label">Project health</div>
+    <div class="metric" id="healthStatus">Loading...</div>
+    <div class="muted" id="healthDetail">Development overview</div>
+  </div>
+  <div class="card">
+    <div class="label">Departments designed</div>
+    <div class="metric">6 / 7</div>
+    <div class="muted">One department planned</div>
+  </div>
+  <div class="card">
+    <div class="label">Pending decisions</div>
+    <div class="metric" id="pendingCount">0</div>
+    <div class="muted">Recorded approval requests</div>
+  </div>
+  <div class="card">
+    <div class="label">Recorded risks</div>
+    <div class="metric" id="riskCount">0</div>
+    <div class="muted">Recorded project issues</div>
+  </div>
+</div>
+<div class="card">
+  <div class="section">Recent Founder activity</div>
+  <div id="recentActivity" class="muted">No activity recorded.</div>
+</div>
+<div class="notice">
+<strong>Founder oversight:</strong> This is a local information dashboard. It does not monitor live servers, broker accounts, AI agents or actual trading risks.
+</div>
+`;
+
+document.querySelector("main").insertBefore(commandCenter, logSection);
+
+function updateCommandCenter() {
+  let tasks = [];
+  let logs = [];
+
+  try {
+    tasks = JSON.parse(localStorage.getItem("project2Milestones")) || [];
+    logs = JSON.parse(localStorage.getItem("project2ActivityLog")) || [];
+  } catch(e) {}
+
+  const completed = tasks.filter(x => x.status === "Completed").length;
+  const percent = tasks.length ? Math.round(
+    tasks.reduce((sum,x) => sum +
+    (x.status === "Completed" ? 100 :
+    x.status === "In Progress" ? 50 : 0),0) / tasks.length
+  ) : 0;
+
+  document.getElementById("healthStatus").textContent =
+    percent >= 75 ? "Advanced" :
+    percent >= 40 ? "Developing" : "Early stage";
+
+  document.getElementById("healthDetail").textContent =
+    percent + "% progress · " + completed + " completed milestones";
+
+  document.getElementById("pendingCount").textContent =
+    logs.filter(x => x.type === "Pending approval").length;
+
+  document.getElementById("riskCount").textContent =
+    logs.filter(x => x.type === "Project risk or issue").length;
+
+  const recent = document.getElementById("recentActivity");
+  recent.innerHTML = "";
+
+  if (!logs.length) {
+    recent.textContent = "No activity recorded yet.";
+  } else {
+    logs.slice(0,3).forEach(entry => {
+      const item = document.createElement("div");
+      item.className = "milestone";
+
+      const title = document.createElement("strong");
+      title.textContent = entry.type;
+
+      const date = document.createElement("div");
+      date.textContent = entry.date;
+      date.className = "muted";
+
+      const description = document.createElement("div");
+      description.textContent = entry.text;
+
+      item.append(title,date,description);
+      recent.append(item);
+    });
+  }
+}
+
+updateCommandCenter();
+
 render();
 </script>
 </body>
