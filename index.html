@@ -1,77 +1,186 @@
 
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Project 2 — Founder Control Panel</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project 2 - Founder Control Panel</title>
 <style>
 :root{--panel:#141c2d;--text:#eef3ff;--muted:#9aa8c2;--line:#2b3850;--blue:#7897ff}
 *{box-sizing:border-box}
 body{margin:0;background:linear-gradient(160deg,#10182a,#080c17 65%);color:var(--text);font:15px system-ui,sans-serif;padding:16px}
-main{max-width:760px;margin:auto}.eyebrow{font-size:11px;letter-spacing:2px;color:#9cb4ff;font-weight:800}
-header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin:8px 0 16px}
-h1{font-size:24px;margin:4px 0}.muted{color:var(--muted);font-size:12px}
-.pill{border:1px solid #6a5733;background:#2c2417;color:#ffd38a;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800}
-.notice{background:#302719;border:1px solid #6c5130;border-radius:12px;padding:12px;color:#f8d9a5;font-size:13px;line-height:1.45;margin-bottom:14px}
+main{max-width:760px;margin:auto}
+header{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 16px}
+h1{font-size:24px;margin:4px 0}
+.muted{color:var(--muted);font-size:12px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#9cb4ff;font-weight:800}
+.pill{border:1px solid #6a5733;background:#2c2417;color:#ffdf8a;padding:7px 10px;border-radius:99px;font-size:11px}
+.notice{background:#302719;border:1px solid #6c5130;color:#f8d9a5;border-radius:12px;padding:12px;font-size:13px;line-height:1.5;margin-bottom:14px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
-.label{font-size:12px;color:var(--muted);margin-bottom:7px}.metric{font-size:20px;font-weight:800}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.label{font-size:12px;color:var(--muted);margin-bottom:7px}
+.metric{font-size:20px;font-weight:800}
 .section{font-weight:800;margin:20px 0 10px;font-size:16px}
-.progressline{display:flex;justify-content:space-between;gap:8px;margin:12px 0 6px;font-size:13px}
-.track{height:7px;background:#27344b;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--blue);border-radius:99px}
-.statusrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
-.statusrow:last-child{border:0}.name{font-weight:700}.desc{font-size:12px;color:var(--muted);margin-top:3px}
-.state{font-size:10px;font-weight:800;border-radius:999px;padding:6px 8px;background:#292f3d;color:#b6c0d4;white-space:nowrap}
-.state.ready{background:#183328;color:#9bf0c6}.state.review{background:#382b18;color:#ffd58a}
+.progressline{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:7px;font-size:13px}
+.track{height:8px;background:#27344b;border-radius:99px;overflow:hidden;margin:8px 0 15px}
+.fill{height:100%;background:var(--blue);border-radius:99px;transition:width .2s}
+select{background:#202d43;color:white;border:1px solid #465775;border-radius:8px;padding:9px;width:100%;font-size:13px}
+.milestone{padding:12px 0;border-bottom:1px solid var(--line)}
+.milestone:last-child{border-bottom:0}
+.statusrow{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.state{font-size:10px;font-weight:800;border-radius:99px;padding:6px 8px;background:#292f3d;color:#b6c0d4}
+.ready{background:#183328;color:#9bf0b6}
+.review{background:#382b18;color:#ffd58a}
 .controls{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
-.btn{border:1px solid #425270;background:#24324a;color:white;border-radius:10px;padding:10px 13px;font-weight:700}
-.btn.primary{background:#3157c9;border-color:#5277ec}
+button{border:1px solid #425270;background:#24324a;color:white;border-radius:10px;padding:10px 13px;font-weight:700}
+.primary{background:#3157c9;border-color:#5277ec}
 footer{font-size:11px;color:var(--muted);text-align:center;margin:22px 0 8px}
-@media(max-width:420px){body{padding:12px}h1{font-size:21px}.metric{font-size:18px}}
+@media(max-width:420px){body{padding:12px}.grid{grid-template-columns:1fr}h1{font-size:21px}}
 </style>
 </head>
-<body><main>
+<body>
+<main>
 <div class="eyebrow">PROJECT 2 · AI TRADING ORGANIZATION</div>
-<header><div><h1>Founder Control Panel</h1><div class="muted">Project overview · Development progress</div></div><span class="pill">DEMO ONLY</span></header>
-<div class="notice"><strong>Prototype notice:</strong> Progress and status are illustrative project-tracking values, not live backend or agent telemetry. MT5 and real-money trading are not connected or authorized.</div>
+<header>
+<div>
+<h1>Founder Control Panel</h1>
+<div class="muted">Project overview · Development progress</div>
+</div>
+<span class="pill">DEMO ONLY</span>
+</header>
+
+<div class="notice">
+<strong>Prototype notice:</strong> Progress values are local project-tracking records. No live backend, AI agents, broker, or MT5 connection is active. Live trading is not authorized.
+</div>
+
 <div class="grid">
-<div class="card"><div class="label">Project phase</div><div class="metric">Design & prototype</div><div class="muted">Pre-computer preparation</div></div>
-<div class="card"><div class="label">Live trading</div><div class="metric">Not authorized</div><div class="muted">Requires separate Founder approval</div></div>
-</div>
-<div class="section">Project progress · planning view</div>
 <div class="card">
-<div class="progressline"><span>Core organization design</span><strong>Approved planning</strong></div><div class="track"><div class="fill" style="width:82%"></div></div>
-<div class="progressline"><span>Mobile dashboard prototype</span><strong>Published</strong></div><div class="track"><div class="fill" style="width:100%"></div></div>
-<div class="progressline"><span>Python pre-computer learning</span><strong>In progress</strong></div><div class="track"><div class="fill" style="width:20%"></div></div>
-<div class="progressline"><span>Backend implementation</span><strong>Not started</strong></div><div class="track"><div class="fill" style="width:0%"></div></div>
-<div class="progressline"><span>Backtesting & demo validation</span><strong>Not started</strong></div><div class="track"><div class="fill" style="width:0%"></div></div>
+<div class="label">Project phase</div>
+<div class="metric">Design & prototype</div>
+<div class="muted">Pre-computer preparation</div>
 </div>
+<div class="card">
+<div class="label">Live trading</div>
+<div class="metric">Not authorized</div>
+<div class="muted">Requires separate Founder approval</div>
+</div>
+</div>
+
+<div class="section">Project progress tracker</div>
+<div class="card">
+<div class="progressline">
+<strong>Overall project progress</strong>
+<strong id="overall">50%</strong>
+</div>
+<div class="track"><div class="fill" id="overallBar" style="width:50%"></div></div>
+<div class="muted">Progress is calculated from the five milestone statuses below.</div>
+<div id="milestones"></div>
+</div>
+
 <div class="section">Department overview</div>
-<div class="card">
-<div class="statusrow"><div><div class="name">Executive Intelligence</div><div class="desc">Founder-led governance</div></div><span class="state ready">CHARTERED</span></div>
-<div class="statusrow"><div><div class="name">Market Intelligence</div><div class="desc">Fundamental + technical consensus</div></div><span class="state ready">DESIGNED</span></div>
-<div class="statusrow"><div><div class="name">Risk Management</div><div class="desc">Independent risk veto and limits</div></div><span class="state ready">DESIGNED</span></div>
-<div class="statusrow"><div><div class="name">Trade Execution</div><div class="desc">MT5 execution framework</div></div><span class="state ready">DESIGNED</span></div>
-<div class="statusrow"><div><div class="name">Central Operations</div><div class="desc">Monitoring, continuity, coordination</div></div><span class="state ready">DESIGNED</span></div>
-<div class="statusrow"><div><div class="name">Mobile Operations</div><div class="desc">Android visibility and safe controls</div></div><span class="state ready">PROTOTYPED</span></div>
-<div class="statusrow"><div><div class="name">Central AI & infrastructure</div><div class="desc">Architecture + deployment preparation</div></div><span class="state review">PLANNED</span></div>
+<div class="card" id="departments">
+<div class="milestone statusrow"><div><strong>Executive Intelligence</strong><div class="muted">Founder-led governance</div></div><span class="state ready">CHARTERED</span></div>
+<div class="milestone statusrow"><div><strong>Market Intelligence</strong><div class="muted">Fundamental + technical consensus</div></div><span class="state ready">DESIGNED</span></div>
+<div class="milestone statusrow"><div><strong>Risk Management</strong><div class="muted">Independent risk veto and limits</div></div><span class="state ready">DESIGNED</span></div>
+<div class="milestone statusrow"><div><strong>Trade Execution</strong><div class="muted">MT5 execution framework</div></div><span class="state ready">DESIGNED</span></div>
+<div class="milestone statusrow"><div><strong>Central Operations</strong><div class="muted">Monitoring, continuity, coordination</div></div><span class="state ready">DESIGNED</span></div>
+<div class="milestone statusrow"><div><strong>Mobile Operations</strong><div class="muted">Android visibility and safe controls</div></div><span class="state ready">PROTOTYPED</span></div>
+<div class="milestone statusrow"><div><strong>Central AI & infrastructure</strong><div class="muted">Architecture + deployment preparation</div></div><span class="state review">PLANNED</span></div>
 </div>
-<div class="section">Pending milestones</div>
+
+<div class="section">Next milestones</div>
 <div class="card">
-<div class="statusrow"><div><div class="name">1 · Continue Python exercises</div><div class="desc">Build beginner programming foundations</div></div><span class="state review">NEXT</span></div>
-<div class="statusrow"><div><div class="name">2 · Build backend skeleton</div><div class="desc">After computer access; API and database basics</div></div><span class="state">PENDING</span></div>
-<div class="statusrow"><div><div class="name">3 · Create simulated agent workflow</div><div class="desc">No broker connection; test signals and risk gates</div></div><span class="state">PENDING</span></div>
-<div class="statusrow"><div><div class="name">4 · Backtest and demo validation</div><div class="desc">Document results and safety checks</div></div><span class="state">PENDING</span></div>
+<div class="milestone"><strong>1 · Continue Python exercises</strong><div class="muted">Build beginner programming foundations</div></div>
+<div class="milestone"><strong>2 · Build backend skeleton</strong><div class="muted">After computer access; API and database basics</div></div>
+<div class="milestone"><strong>3 · Create simulated agent workflow</strong><div class="muted">No broker connection; test signals and risk gates</div></div>
+<div class="milestone"><strong>4 · Backtest and demo validation</strong><div class="muted">Document results and safety checks</div></div>
 </div>
+
 <div class="section">Founder preview controls</div>
-<div class="card"><div class="desc">These controls change only this page's local preview label. They do not control servers, AI agents, or trades.</div>
-<div class="controls"><button class="btn primary" id="pauseBtn" onclick="toggleDemo()">Pause preview</button><button class="btn" onclick="resetDemo()">Reset preview</button></div>
-<div class="muted" id="demoState" aria-live="polite">Preview state: running locally in this page</div></div>
+<div class="card">
+<div class="muted">These controls only change this page's local preview label. They do not control servers, AI agents, or trades.</div>
+<div class="controls">
+<button class="primary" id="pauseBtn" onclick="toggleDemo()">Pause preview</button>
+<button onclick="resetPreview()">Reset preview</button>
+</div>
+<div class="muted" id="demoState" aria-live="polite">Preview state: running locally in this page</div>
+</div>
+
 <footer>TEST FIRST · PROTECT CAPITAL · AUTOMATE RESPONSIBLY<br>Project 2 · Founder view · Prototype</footer>
 </main>
+
 <script>
-let paused=false;
-function toggleDemo(){paused=!paused;document.getElementById('pauseBtn').textContent=paused?'Resume preview':'Pause preview';document.getElementById('demoState').textContent=paused?'Preview state: paused locally':'Preview state: running locally in this page'}
-function resetDemo(){paused=false;document.getElementById('pauseBtn').textContent='Pause preview';document.getElementById('demoState').textContent='Preview state: running locally in this page'}
-</script></body></html>
+const defaults = [
+{name:"Core organization design",status:"Completed"},
+{name:"Mobile dashboard prototype",status:"Completed"},
+{name:"Python pre-computer learning",status:"In Progress"},
+{name:"Backend implementation",status:"Not Started"},
+{name:"Backtesting & demo validation",status:"Not Started"}
+];
+
+let milestones;
+try {
+ const saved = JSON.parse(localStorage.getItem("project2Milestones"));
+ milestones = Array.isArray(saved) && saved.length === defaults.length ? saved : defaults.map(x=>({...x}));
+} catch(e) {
+ milestones = defaults.map(x=>({...x}));
+}
+
+function render(){
+ const container=document.getElementById("milestones");
+ container.innerHTML="";
+ let total=0;
+ milestones.forEach((item,index)=>{
+  const score=item.status==="Completed"?100:item.status==="In Progress"?50:0;
+  total+=score;
+  const section=document.createElement("div");
+  section.className="milestone";
+  const title=document.createElement("div");
+  title.className="progressline";
+  const name=document.createElement("strong");
+  name.textContent=item.name;
+  const percent=document.createElement("span");
+  percent.textContent=score+"%";
+  title.append(name,percent);
+  const track=document.createElement("div");
+  track.className="track";
+  const fill=document.createElement("div");
+  fill.className="fill";
+  fill.style.width=score+"%";
+  track.append(fill);
+  const select=document.createElement("select");
+  select.setAttribute("aria-label","Status for "+item.name);
+  ["Not Started","In Progress","Completed"].forEach(status=>{
+   const option=document.createElement("option");
+   option.value=status;
+   option.textContent=status;
+   option.selected=item.status===status;
+   select.append(option);
+  });
+  select.addEventListener("change",()=>{
+   milestones[index].status=select.value;
+   try{localStorage.setItem("project2Milestones",JSON.stringify(milestones));}
+   catch(e){alert("Browser storage is unavailable. Your change may not be saved.");}
+   render();
+  });
+  section.append(title,track,select);
+  container.append(section);
+ });
+ const average=Math.round(total/milestones.length);
+ document.getElementById("overall").textContent=average+"%";
+ document.getElementById("overallBar").style.width=average+"%";
+}
+function toggleDemo(){
+ const paused=document.getElementById("pauseBtn").textContent==="Pause preview";
+ document.getElementById("pauseBtn").textContent=paused?"Resume preview":"Pause preview";
+ document.getElementById("demoState").textContent=paused?"Preview state: paused locally":"Preview state: running locally in this page";
+}
+function resetPreview(){
+ document.getElementById("pauseBtn").textContent="Pause preview";
+ document.getElementById("demoState").textContent="Preview state: running locally in this page";
+}
+render();
+</script>
+</body>
+</html>
