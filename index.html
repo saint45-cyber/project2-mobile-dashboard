@@ -289,6 +289,167 @@ commandCenter.innerHTML = `
 
 document.querySelector("main").insertBefore(commandCenter, logSection);
 
+// FOUNDER APPROVAL CENTRE
+const approvalSection = document.createElement("section");
+
+approvalSection.className = "card";
+approvalSection.innerHTML = `
+  <div class="section">Founder Approval Centre</div>
+
+  <p class="muted">
+    Review requests and record Founder decisions.
+  </p>
+
+  <label for="approvalRequest">New approval request</label>
+  <textarea id="approvalRequest"
+    placeholder="Describe what requires Founder approval..."
+    rows="3"></textarea>
+
+  <button id="addApprovalRequest">Submit request</button>
+
+  <div class="section">Pending Requests</div>
+  <div id="approvalPending" class="muted">
+    No pending requests.
+  </div>
+
+  <div class="section">Decision History</div>
+  <div id="approvalHistory" class="muted">
+    No decisions recorded.
+  </div>
+
+  <div class="notice">
+    Founder decisions recorded here are local demo records only.
+    They do not authorize live trading or change real system permissions.
+  </div>
+`;
+
+document.querySelector("main").insertBefore(
+  approvalSection,
+  commandCenter
+);
+
+let approvalRecords = [];
+
+try {
+  approvalRecords = JSON.parse(
+    localStorage.getItem("project2Approvals")
+  ) || [];
+} catch (error) {
+  approvalRecords = [];
+}
+
+function saveApprovalRecords() {
+  try {
+    localStorage.setItem(
+      "project2Approvals",
+      JSON.stringify(approvalRecords)
+    );
+  } catch (error) {
+    alert("Could not save approval records.");
+  }
+}
+
+function renderApprovalCentre() {
+  const pending = document.getElementById("approvalPending");
+  const history = document.getElementById("approvalHistory");
+
+  pending.innerHTML = "";
+  history.innerHTML = "";
+
+  const pendingRecords = approvalRecords.filter(
+    item => item.status === "Pending"
+  );
+
+  const decidedRecords = approvalRecords.filter(
+    item => item.status !== "Pending"
+  ).reverse();
+
+  if (!pendingRecords.length) {
+    pending.textContent = "No pending requests.";
+  }
+
+  pendingRecords.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "milestone";
+
+    const description = document.createElement("p");
+    description.textContent = item.request;
+
+    const date = document.createElement("p");
+    date.className = "muted";
+    date.textContent = "Submitted: " + item.submittedAt;
+
+    const approve = document.createElement("button");
+    approve.textContent = "Approve";
+    approve.onclick = () => decideApproval(item.id, "Approved");
+
+    const reject = document.createElement("button");
+    reject.textContent = "Reject";
+    reject.onclick = () => decideApproval(item.id, "Rejected");
+
+    card.append(description, date, approve, reject);
+    pending.appendChild(card);
+  });
+
+  if (!decidedRecords.length) {
+    history.textContent = "No decisions recorded.";
+  }
+
+  decidedRecords.forEach(item => {
+    const entry = document.createElement("div");
+    entry.className = "milestone";
+    entry.textContent =
+      item.status + ": " + item.request +
+      " | Decision time: " + item.decidedAt;
+    history.appendChild(entry);
+  });
+}
+
+document.getElementById("addApprovalRequest")
+  .addEventListener("click", () => {
+    const field = document.getElementById("approvalRequest");
+    const request = field.value.trim();
+
+    if (!request) {
+      alert("Enter an approval request first.");
+      return;
+    }
+
+    approvalRecords.push({
+      id: Date.now().toString(),
+      request: request,
+      status: "Pending",
+      submittedAt: new Date().toLocaleString(),
+      decidedAt: ""
+    });
+
+    saveApprovalRecords();
+    field.value = "";
+    renderApprovalCentre();
+  });
+
+function decideApproval(id, decision) {
+  const item = approvalRecords.find(
+    record => record.id === id
+  );
+
+  if (!item || item.status !== "Pending") return;
+
+  if (!confirm("Record this Founder decision: " + decision + "?")) {
+    return;
+  }
+
+  item.status = decision;
+  item.decidedAt = new Date().toLocaleString();
+
+  saveApprovalRecords();
+  renderApprovalCentre();
+}
+
+renderApprovalCentre();
+
+// END FOUNDER APPROVAL CENTRE
+
 function updateCommandCenter() {
   let tasks = [];
   let logs = [];
